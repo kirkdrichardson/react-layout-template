@@ -19,7 +19,7 @@ border: 5px solid red;
   top: 0;
   right: 0;
   left: 0;
-  height: ${props => props.headerHeight ? props.headerHeight : web.headerHeight}px;
+  height: ${props => props.height ? props.height : web.headerHeight}px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -29,6 +29,7 @@ border: 5px solid red;
 
 export const MainContent = styled.div`
 border: 5px solid purple;
+
   flex: 1;
   height: 100%;
   width: 100%;
