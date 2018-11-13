@@ -1,15 +1,18 @@
 module.exports = {
   web: {
     headerHeight: 100,
-    bodyPadding: 20,
+    bodyPadding: 40,
+    hasSidebar: true,
     sidebarWidth: 180
   },
   tablet: {
     headerHeight: 80,
-    bodyPadding: 20,
-    sidebarWidth: 180
+    bodyPadding: 40,
+    hasSidebar: false
   },
   mobile: {
     headerHeight: 40,
+    bodyPadding: 20,
+    hasSidebar: false
   }
 }

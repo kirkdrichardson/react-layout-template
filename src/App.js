@@ -3,8 +3,15 @@ import React, { Component } from 'react';
 //
 // import Color from './common/Color';
 import Style from './common/Style';
-import { AppContainer, Header, MainContent, Sidebar } from './common/MainLayout';
+import {
+  DeviceEnums,
+  AppContainer,
+  Header,
+  MainContent,
+  Sidebar
+} from './common/MainLayout';
 
+// We modify the style at these breakpoints
 const BreakPoint = {
   DESKTOP: 1600,
   TABLET: 800,
@@ -15,7 +22,7 @@ class App extends Component {
   state = {
     screenWidth: 1600,
     screenHeight: 900,
-    style: Style.web
+    device: DeviceEnums.DESKTOP // we default style to a Desktop layout
   };
 
   componentDidMount() {
@@ -27,16 +34,16 @@ class App extends Component {
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
-//   componentDidUpdate(prevProps, prevState) {
-//     if (prevState.screenHeight !== this.state.screenHeight
-//         || prevState.screenWidth !== this.state.screenWidth) {
-//       const style = this.getStyle(this.state.screenWidth, this.state.screenHeight);
-//
-// console.warn('test')
-// console.warn(style)
-//       this.setState({style}, () => console.warn('test2'));
-//     }
-//   }
+  // update device type if screen dimensions don't match the default
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.screenHeight !== this.state.screenHeight
+        || prevState.screenWidth !== this.state.screenWidth) {
+      const device = this.getDevice(this.state.screenWidth, this.state.screenHeight);
+      if (device) {
+        this.setState({device});
+      }
+    }
+  }
 
   updateWindowDimensions = () => {
     this.setState({
@@ -45,24 +52,24 @@ class App extends Component {
     });
   }
 
-  getStyle = (w, h) => {
-    console.log(w, h)
-    if (w < BreakPoint.MOBILE) {
-      return Style.mobile;
-    } else if (w < BreakPoint.TABLET) {
-      return Style.tablet;
+  getDevice = (w, h) => {
+    if (w <= BreakPoint.MOBILE) {
+      return DeviceEnums.MOBILE;
+    } else if (w <= BreakPoint.TABLET) {
+      return DeviceEnums.TABLET;
     } else {
-      return Style.DESKTOP;
+      return DeviceEnums.DESKTOP;
     }
   }
 
   render() {
-    // const { style } = this.state;
+    const { device } = this.state;
+    console.log(device)
     return (
       <AppContainer>
-        <Header>Bubbles!</Header>
-        <Sidebar />
-        <MainContent>
+        <Header device={device}>Bubbles!</Header>
+        { DeviceEnums.DESKTOP === device && <Sidebar /> }
+        <MainContent device={device}>
           Here's some content
         </MainContent>
       </AppContainer>
