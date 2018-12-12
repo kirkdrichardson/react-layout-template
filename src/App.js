@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // import styled from 'styled-components';
 //
 // import Color from './common/Color';
-import Style from './common/Style';
+// import Style from './common/Style';
 import {
   DeviceEnums,
   AppContainer,
@@ -20,7 +20,14 @@ const BreakPoint = {
   MOBILE: 400
 };
 
-class App extends Component {
+type State = {
+  screenWidth: number,
+  screenHeight: number,
+  device: string // we default style to a Desktop layout
+}
+
+
+class App extends Component<{}, State> {
   state = {
     screenWidth: 1600,
     screenHeight: 900,
@@ -37,7 +44,7 @@ class App extends Component {
   }
 
   // update device type if screen dimensions don't match the default
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: {}, prevState: State) {
     if (prevState.screenHeight !== this.state.screenHeight
         || prevState.screenWidth !== this.state.screenWidth) {
       const device = this.getDevice(this.state.screenWidth, this.state.screenHeight);
@@ -47,14 +54,14 @@ class App extends Component {
     }
   }
 
-  updateWindowDimensions = () => {
+  updateWindowDimensions = (): void => {
     this.setState({
       screenWidth: window.innerWidth,
       screenHeight: window.innerHeight
     });
   }
 
-  getDevice = (w, h) => {
+  getDevice = (w: number, h: number): string => {
     if (w <= BreakPoint.MOBILE) {
       return DeviceEnums.MOBILE;
     } else if (w <= BreakPoint.TABLET) {
@@ -66,7 +73,8 @@ class App extends Component {
 
   render() {
     const { device } = this.state;
-    console.log(device)
+    console.log(device);
+    
     return (
       <AppContainer>
         <Header device={device}>Bubbles!</Header>

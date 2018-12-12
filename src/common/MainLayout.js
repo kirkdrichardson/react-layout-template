@@ -1,3 +1,4 @@
+// @flow
 import styled, {css} from 'styled-components';
 
 // import Color from './common/Color';
@@ -8,6 +9,7 @@ export const DeviceEnums = {
   TABLET: 'TABLET',
   MOBILE: 'MOBILE'
 };
+
 
 // TODO - rewrite as styled components theme https://www.styled-components.com/docs/advanced
 
