@@ -1,14 +1,18 @@
 // @flow
 
 import React, { Component } from 'react';
+
+import Header from './component/Header';
+
 // import styled from 'styled-components';
 //
 // import Color from './common/Color';
 // import Style from './common/Style';
+
+
 import {
   DeviceEnums,
   AppContainer,
-  Header,
   MainContent,
   Sidebar
 } from './common/MainLayout';
@@ -77,7 +81,7 @@ class App extends Component<{}, State> {
     
     return (
       <AppContainer>
-        <Header device={device}>Bubbles!</Header>
+        <Header />
         { DeviceEnums.DESKTOP === device && <Sidebar /> }
         <MainContent device={device}>
           Here's some content

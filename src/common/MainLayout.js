@@ -2,9 +2,10 @@
 import styled, {css} from 'styled-components';
 
 // import Color from './common/Color';
-import {web, tablet, mobile} from './Style';
+import {web, tablet, mobile} from 'common/Style';
 
-export const DeviceEnums = {
+
+export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
   DESKTOP: 'DESKTOP',
   TABLET: 'TABLET',
   MOBILE: 'MOBILE'
@@ -21,28 +22,6 @@ border: 5px solid blue;
   position: relative;
   box-sizing: border-box;
 `;
-
-export const Header = styled.div`
-border: 5px solid red;
-
-  background-color: green;
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  z-index: 4;
-  height: ${props => props.device === DeviceEnums.MOBILE ? mobile.headerHeight : web.headerHeight}px;
-
-`;
-
-// export const MobileHeader = styled(Header)`
-//   height: ${mobile.headerHeight}
-// `;
-
 
 export const MainContent = styled.div`
 border: 5px solid purple;
