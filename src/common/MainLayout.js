@@ -2,7 +2,7 @@
 import styled, {css} from 'styled-components';
 
 // import Color from './common/Color';
-import {web, tablet, mobile} from 'common/Style';
+import {web, mobile} from 'common/Style';
 
 
 export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
@@ -40,8 +40,6 @@ border: 5px solid purple;
   ${props => {
     if (props.device) {
       if (props.device === DeviceEnums.DESKTOP) {
-        console.warn(props.device)
-
         return css`
           background-color: 'red'
         `;

@@ -11,7 +11,7 @@ module.exports = {
     hasSidebar: false
   },
   mobile: {
-    headerHeight: 40,
+    headerHeight: 60,
     bodyPadding: 20,
     hasSidebar: false
   }
