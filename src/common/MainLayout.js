@@ -23,7 +23,7 @@ border: 5px solid blue;
   box-sizing: border-box;
 `;
 
-export const MainContent = styled.div`
+export const MainContent = styled.main`
 border: 5px solid purple;
 
   flex: 1;
@@ -37,6 +37,7 @@ border: 5px solid purple;
   color: white;
   font-size: 30px;
   z-index: 2;
+  overflow: auto;
   ${props => {
     if (props.device) {
       if (props.device === DeviceEnums.DESKTOP) {

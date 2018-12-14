@@ -11,13 +11,38 @@ type State = {
     open: boolean
 };
 
+// used to toggle scroll
+
 class Sidebar extends React.Component<{}, State> {
     state = { open: false };
 
-    toggleSidebar = (): void => {
-        this.setState((prevState) => ({
-            open: !prevState.open
-        }));
+    // add an event listener to autoclose sidebar when the sidebar is open
+    componentDidUpdate(_: {}, prevState: State) {
+        if (prevState.open !== this.state.open) {
+            if (this.state.open) {
+                document.addEventListener('click', this.closeSidebar);
+            } else {
+                document.removeEventListener('click', this.closeSidebar);
+            }
+        }
+    }
+
+    // sidebar should always remain mounted, but as a memory-leak preventing safety measure, remove any lingering event listener
+    componentWillUnmount() {
+        document.removeEventListener('click', this.closeSidebar);
+    }
+
+    // open & close methods are split for transitions & event listeners 
+    closeSidebar = (): void => {
+        if (this.state.open) {
+            document.getElementsByTagName('main')[0].style.overflow = '';
+            this.setState({ open: false });
+        }
+    }
+
+    openSidebar = (): void => {
+        document.getElementsByTagName('main')[0].style.overflow = 'hidden';
+        this.setState({ open: true });
     }
 
     render() {
@@ -25,16 +50,37 @@ class Sidebar extends React.Component<{}, State> {
 
         return (
             <div>
-                <button onClick={this.toggleSidebar}>open</button>
+
+                <Button onClick={this.state.open ? this.closeSidebar : this.openSidebar}>
+                    <Icon className="material-icons">view_module</Icon>
+                </Button>
+
                 {open &&
                     <SidebarWrapper>
                         Nav elements here
                     </SidebarWrapper>
                 }
+
+                {open && <FixedPositionOverlay /> }
             </div>
         );
     }
 }
+
+const Button = styled.button`
+    background: transparent;
+    margin: 0;
+    border: 0;
+`;
+
+const Icon = styled.i`
+    font-size: 50px;
+    color: fuchsia;
+
+    :hover {
+        opacity: 0.8;
+    }
+`;
 
 const SidebarWrapper = styled.div`
 border: 5px solid blue;
@@ -47,19 +93,27 @@ border: 5px solid blue;
   z-index: 3;
   box-sizing: border-box;
 
-  ${media.desktop`background: dodgerblue;`}
-  
   ${media.tablet`
-  background: mediumseagreen;
   top: ${tablet.headerHeight}px;
   `}
   
-  
   ${media.mobile`
-  background: palevioletred;
   top: ${mobile.headerHeight}px;
-  
   `}
+`;
+
+const FixedPositionOverlay = styled.div`
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: #222;
+    opacity: 0.4;
+    z-index: -99;
+
+    top:  ${web.headerHeight}px;
+     ${media.tablet`top: ${tablet.headerHeight}px;`}
+    ${media.mobile`top: ${mobile.headerHeight}px;`}
 `;
 
 

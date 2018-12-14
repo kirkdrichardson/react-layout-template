@@ -15,7 +15,9 @@ class Header extends React.Component<Props> {
     render() {
         return (
             <HeaderWrapper>
-                <Sidebar />
+                <SidebarWrapper>
+                    <Sidebar />
+                </SidebarWrapper>
             </HeaderWrapper>
         );
     }
@@ -34,7 +36,7 @@ const HeaderWrapper = styled.div`
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    z-index: 4;
+    z-index: 99;
     height: ${web.headerHeight}px;
     
     ${media.desktop`background: dodgerblue;`}
@@ -50,6 +52,11 @@ const HeaderWrapper = styled.div`
     height: ${mobile.headerHeight}px;
     
     `}
+`;
+
+const SidebarWrapper = styled.div`
+    margin-right: auto;
+    margin-left: 20px;
 `;
 
 

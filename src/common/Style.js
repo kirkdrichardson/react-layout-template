@@ -3,7 +3,7 @@ module.exports = {
     headerHeight: 100,
     bodyPadding: 40,
     hasSidebar: true,
-    sidebarWidth: 180
+    sidebarWidth: 280
   },
   tablet: {
     headerHeight: 80,
