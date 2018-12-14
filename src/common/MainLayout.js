@@ -47,15 +47,3 @@ border: 5px solid purple;
     }
   }}
 `;
-
-export const Sidebar = styled.div`
-border: 5px solid blue;
-
-  position: absolute;
-  left: 0;
-  top:  ${web.headerHeight}px;
-  bottom: 0;
-  width: ${web.sidebarWidth}px;
-  z-index: 3;
-  box-sizing: border-box;
-`;

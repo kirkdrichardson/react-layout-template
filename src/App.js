@@ -2,20 +2,19 @@
 
 import React, { Component } from 'react';
 
-import Header from './component/Header';
+import Header from './component/common/Header';
 
 // import styled from 'styled-components';
 //
-// import Color from './common/Color';
-// import Style from './common/Style';
+// import Color from 'common/Color';
+// import Style from 'common/Style';
 
 
 import {
   DeviceEnums,
   AppContainer,
-  MainContent,
-  Sidebar
-} from './common/MainLayout';
+  MainContent
+} from 'common/MainLayout';
 
 // We modify the style at these breakpoints
 const BreakPoint = {
@@ -51,7 +50,10 @@ class App extends Component<{}, State> {
   componentDidUpdate(prevProps: {}, prevState: State) {
     if (prevState.screenHeight !== this.state.screenHeight
         || prevState.screenWidth !== this.state.screenWidth) {
+     
       const device = this.getDevice(this.state.screenWidth, this.state.screenHeight);
+      
+      // safety check
       if (device) {
         this.setState({device});
       }
@@ -77,12 +79,12 @@ class App extends Component<{}, State> {
 
   render() {
     const { device } = this.state;
-    console.log(device);
+    
+    console.log(`w: ${this.state.screenWidth} || h: ${this.state.screenHeight}`);
     
     return (
       <AppContainer>
         <Header />
-        { DeviceEnums.DESKTOP === device && <Sidebar /> }
         <MainContent device={device}>
           Here's some content
         </MainContent>

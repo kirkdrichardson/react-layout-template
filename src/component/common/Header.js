@@ -2,16 +2,20 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
-import {web, tablet, mobile} from './../common/Style';
+
+import Sidebar from 'component/common/Sidebar';
+
+import {web, tablet, mobile} from 'common/Style';
 import { media } from 'common/Breakpoints';
 
 type Props = {||};
+
 
 class Header extends React.Component<Props> {
     render() {
         return (
             <HeaderWrapper>
-                
+                <Sidebar />
             </HeaderWrapper>
         );
     }

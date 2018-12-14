@@ -8,5 +8,7 @@
 
 [options]
 module.name_mapper='^common\(.*\)$' -> '<PROJECT_ROOT>/src/common/\1'
+module.name_mapper='^component\(.*\)$' -> '<PROJECT_ROOT>/src/component/\1'
+
 
 [strict]
