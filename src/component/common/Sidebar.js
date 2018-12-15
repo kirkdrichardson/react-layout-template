@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { media } from 'common/Breakpoints';
 import {web, tablet, mobile} from 'common/Style';
+import Color from 'common/Color';
 
 
 type State = {
@@ -75,7 +76,7 @@ const Button = styled.button`
 
 const Icon = styled.i`
     font-size: 50px;
-    color: fuchsia;
+    color: ${Color.accent};
 
     :hover {
         opacity: 0.8;
@@ -83,23 +84,22 @@ const Icon = styled.i`
 `;
 
 const SidebarWrapper = styled.div`
-border: 5px solid blue;
+    background: ${Color.sidebarBg};
+    position: fixed;
+    left: 0;
+    top:  ${web.headerHeight}px;
+    bottom: 0;
+    width: 300px;
+    z-index: 3;
+    box-sizing: border-box;
 
-  position: fixed;
-  left: 0;
-  top:  ${web.headerHeight}px;
-  bottom: 0;
-  width: ${web.sidebarWidth}px;
-  z-index: 3;
-  box-sizing: border-box;
+    ${media.tablet`
+    top: ${tablet.headerHeight}px;
+    `}
 
-  ${media.tablet`
-  top: ${tablet.headerHeight}px;
-  `}
-  
-  ${media.mobile`
-  top: ${mobile.headerHeight}px;
-  `}
+    ${media.mobile`
+    top: ${mobile.headerHeight}px;
+    `}
 `;
 
 const FixedPositionOverlay = styled.div`
@@ -108,7 +108,7 @@ const FixedPositionOverlay = styled.div`
     left: 0;
     bottom: 0;
     background: #222;
-    opacity: 0.4;
+    opacity: 0.6;
     z-index: -99;
 
     top:  ${web.headerHeight}px;

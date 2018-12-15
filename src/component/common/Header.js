@@ -7,6 +7,7 @@ import Sidebar from 'component/common/Sidebar';
 
 import {web, tablet, mobile} from 'common/Style';
 import { media } from 'common/Breakpoints';
+import Color from 'common/Color';
 
 type Props = {||};
 
@@ -25,9 +26,8 @@ class Header extends React.Component<Props> {
 
 
 const HeaderWrapper = styled.div`
-    border: 5px solid red;
-
-    background: red;
+    background: ${Color.headerBg};
+    border-bottom: 1px solid ${Color.border};
     position: fixed;
     top: 0;
     right: 0;
@@ -39,18 +39,13 @@ const HeaderWrapper = styled.div`
     z-index: 99;
     height: ${web.headerHeight}px;
     
-    ${media.desktop`background: dodgerblue;`}
-    
     ${media.tablet`
-    background: mediumseagreen;
     height: ${tablet.headerHeight}px;
     `}
     
     
     ${media.mobile`
-    background: palevioletred;
     height: ${mobile.headerHeight}px;
-    
     `}
 `;
 

@@ -1,8 +1,9 @@
 // @flow
 import styled, {css} from 'styled-components';
 
-// import Color from './common/Color';
-import {web, mobile} from 'common/Style';
+import Color from 'common/Color';
+import {web, tablet, mobile} from 'common/Style';
+import { media } from 'common/Breakpoints';
 
 
 export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
@@ -16,35 +17,32 @@ export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
 
 
 export const AppContainer = styled.div`
-border: 5px solid blue;
-
   height: 100%;
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  background-color: ${Color.primaryBg};
+  overflow: auto;
 `;
 
 export const MainContent = styled.main`
-border: 5px solid purple;
-
   flex: 1;
   height: 100%;
   width: 100%;
   padding: ${props => props.device === DeviceEnums.MOBILE ? mobile.bodyPadding : web.bodyPadding}px;
-  padding-top: ${web.headerHeight + web.bodyPadding}px;
-  padding-left: ${props => props.device === DeviceEnums.DESKTOP ? web.sidebarWidth + web.bodyPadding : web.bodyPadding}px;
+  padding: ${web.headerHeight + web.bodyPadding}px ${web.bodyPadding}px;
+  max-width: 1200px;
   box-sizing: border-box;
-  background-color: #222;
-  color: white;
-  font-size: 30px;
+  color: ${Color.primaryText};
+  font-size: 24px;
   z-index: 2;
-  overflow: auto;
-  ${props => {
-    if (props.device) {
-      if (props.device === DeviceEnums.DESKTOP) {
-        return css`
-          background-color: 'red'
-        `;
-      }
-    }
-  }}
+
+  ${media.tablet`
+  padding: ${tablet.headerHeight + tablet.bodyPadding}px ${tablet.bodyPadding}px;
+  `}
+
+  ${media.mobile`
+  padding: ${mobile.headerHeight + mobile.bodyPadding}px ${mobile.bodyPadding}px;
+  `}
 `;
