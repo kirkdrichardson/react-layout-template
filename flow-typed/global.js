@@ -9,3 +9,9 @@ declare type RouterProps = {
     location: any,
     history: any
 };
+
+declare type RouteType = {
+    path: string,
+    component: React.ElementType,
+    exact: boolean
+  };

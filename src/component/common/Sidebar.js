@@ -2,11 +2,16 @@
 
 import * as React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { media } from 'common/Breakpoints';
 import {web, tablet, mobile} from 'common/Style';
 import Color from 'common/Color';
 
+
+type Props = {
+    routes: RouteType[]
+};
 
 type State = {
     open: boolean
@@ -14,7 +19,7 @@ type State = {
 
 // used to toggle scroll
 
-class Sidebar extends React.Component<{}, State> {
+class Sidebar extends React.Component<Props, State> {
     state = { open: false };
 
     // add an event listener to autoclose sidebar when the sidebar is open
@@ -58,7 +63,14 @@ class Sidebar extends React.Component<{}, State> {
 
                 {open &&
                     <SidebarWrapper>
-                        Nav elements here
+                        <ul>
+                            {this.props.routes.map(route =>
+                                <li key={route.path}>
+                                    <Link to={route.path}>{route.path}</Link>
+                                </li>
+                            
+                            )}
+                        </ul>
                     </SidebarWrapper>
                 }
 

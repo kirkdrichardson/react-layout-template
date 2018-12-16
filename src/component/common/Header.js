@@ -9,7 +9,9 @@ import {web, tablet, mobile} from 'common/Style';
 import { media } from 'common/Breakpoints';
 import Color from 'common/Color';
 
-type Props = {||};
+type Props = {
+    routes: RouteType[]
+};
 
 
 class Header extends React.Component<Props> {
@@ -17,7 +19,7 @@ class Header extends React.Component<Props> {
         return (
             <HeaderWrapper>
                 <SidebarWrapper>
-                    <Sidebar />
+                    <Sidebar routes={this.props.routes} />
                 </SidebarWrapper>
             </HeaderWrapper>
         );

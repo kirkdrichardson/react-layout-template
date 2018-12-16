@@ -24,12 +24,6 @@ import {
 } from 'common/MainLayout';
 
 
-type RouteType = {
-  path: string,
-  component: React.ElementType,
-  exact: boolean
-};
-
 const routes: RouteType[] = [
   {
       path: '/',
@@ -126,7 +120,7 @@ class App extends React.Component<{}, State> {
 
     return (
         <AppContainer>
-            <Header />
+            <Header routes={routes} />
             <MainContent>
                 <Switch>
                     {routes.map(route => 
