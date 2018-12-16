@@ -1,5 +1,5 @@
 // @flow
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
 
 import Color from 'common/Color';
 import {web, tablet, mobile} from 'common/Style';
@@ -17,7 +17,7 @@ export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
 
 
 export const AppContainer = styled.div`
-  height: 100%;
+  min-height: 100%;
   position: relative;
   box-sizing: border-box;
   display: flex;
