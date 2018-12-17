@@ -28,27 +28,47 @@ const routes: RouteType[] = [
   {
       path: '/',
       component: Home,
-      exact: true
+      exact: true,
+      sidebar: {
+        name: 'Home',
+        icon: 'view_module'
+      }
   },
   {
       path: '/shapes',
       component: Shapes,
-      exact: true
+      exact: true,
+      sidebar: {
+        name: 'Shapes',
+        icon: 'view_module'
+      }
   },
   {
       path: '/color',
       component: Color,
-      exact: true
+      exact: true,
+      sidebar: {
+        name: 'Color',
+        icon: 'view_module'
+      }
   },
   {
       path: '/motion',
       component: Motion,
-      exact: true
+      exact: true,
+      sidebar: {
+        name: 'Motion',
+        icon: 'view_module'
+      }
   },
   {
       path: '/systems',
       component: Systems,
-      exact: true
+      exact: true,
+      sidebar: {
+        name: 'Systems',
+        icon: 'view_module'
+      }
   }
 ];
 

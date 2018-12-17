@@ -17,6 +17,14 @@ type State = {
     open: boolean
 };
 
+const SidebarListItem = ({path, data}: {path: string, data: SidebarDataType}): React.Node => (
+    <li>
+        <i className='material-icons'>{data.icon}</i>
+        <Link to={path}>{data.name}</Link>
+    </li>
+);
+
+
 // used to toggle scroll
 
 class Sidebar extends React.Component<Props, State> {
@@ -58,17 +66,14 @@ class Sidebar extends React.Component<Props, State> {
             <div>
 
                 <Button onClick={this.state.open ? this.closeSidebar : this.openSidebar}>
-                    <Icon className="material-icons">view_module</Icon>
+                    <TriggerIcon className="material-icons">view_module</TriggerIcon>
                 </Button>
 
                 {open &&
                     <SidebarWrapper>
                         <ul>
-                            {this.props.routes.map(route =>
-                                <li key={route.path}>
-                                    <Link to={route.path}>{route.path}</Link>
-                                </li>
-                            
+                            {this.props.routes.map(route => 
+                                <SidebarListItem path={route.path} data={route.sidebar} />
                             )}
                         </ul>
                     </SidebarWrapper>
@@ -86,7 +91,7 @@ const Button = styled.button`
     border: 0;
 `;
 
-const Icon = styled.i`
+const TriggerIcon = styled.i`
     font-size: 50px;
     color: ${Color.accent};
 
