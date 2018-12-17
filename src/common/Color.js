@@ -24,6 +24,9 @@ const colors: {[color_property: string]: string} = {
   get border() {
     return this.darkGray;
   },
+  get borderLighter() {
+    return lighten(0.3, this.darkGray);
+  },
   get primaryBg() {
     return this.white;
   },

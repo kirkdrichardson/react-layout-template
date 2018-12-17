@@ -74,8 +74,11 @@ class Sidebar extends React.Component<Props, State> {
                 {open &&
                     <SidebarWrapper>
                         <StyledList>
-                            {this.props.routes.map(route => 
-                                <SidebarListItem key={route.path} path={route.path} data={route.sidebar} />
+                            {this.props.routes.map(route =>
+                                <>
+                                    <SidebarListItem key={route.path} path={route.path} data={route.sidebar} />
+                                    { route.path === '/' && <Divider />}
+                                </>
                             )}
                         </StyledList>
                     </SidebarWrapper>
@@ -134,6 +137,12 @@ const SidebarListItemWrapper = styled.li`
     font-size: 24px;
     font-weight: bold;
     display: flex;
+`;
+
+const Divider = styled.div`
+    height: 1px;
+    background: ${Color.borderLighter};
+    margin: 18px 0;
 `;
 
 const StyledLink = styled(Link)`
