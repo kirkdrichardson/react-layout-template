@@ -18,10 +18,12 @@ type State = {
 };
 
 const SidebarListItem = ({path, data}: {path: string, data: SidebarDataType}): React.Node => (
-    <li>
-        <i className='material-icons'>{data.icon}</i>
-        <Link to={path}>{data.name}</Link>
-    </li>
+    <SidebarListItemWrapper>
+        <StyledLink to={path}>
+            <SidebarIcon className='material-icons'>{data.icon}</SidebarIcon>
+            <span>{data.name}</span>
+        </StyledLink>
+    </SidebarListItemWrapper>
 );
 
 
@@ -71,11 +73,11 @@ class Sidebar extends React.Component<Props, State> {
 
                 {open &&
                     <SidebarWrapper>
-                        <ul>
+                        <StyledList>
                             {this.props.routes.map(route => 
-                                <SidebarListItem path={route.path} data={route.sidebar} />
+                                <SidebarListItem key={route.path} path={route.path} data={route.sidebar} />
                             )}
-                        </ul>
+                        </StyledList>
                     </SidebarWrapper>
                 }
 
@@ -93,7 +95,7 @@ const Button = styled.button`
 
 const TriggerIcon = styled.i`
     font-size: 50px;
-    color: ${Color.accent};
+    color: ${Color.white};
 
     :hover {
         opacity: 0.8;
@@ -117,6 +119,41 @@ const SidebarWrapper = styled.div`
     ${media.mobile`
     top: ${mobile.headerHeight}px;
     `}
+`;
+
+const StyledList = styled.ul`
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-flow: column nowrap;
+    flex: 1;
+`;
+
+const SidebarListItemWrapper = styled.li`
+    color: ${Color.invertedText};
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+`;
+
+const StyledLink = styled(Link)`
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 20px 20px;
+    color: ${Color.invertedText};
+    text-decoration: none;
+    :visited {
+        color: ${Color.invertedText};
+    }
+    :hover {
+        background-color: ${Color.sidebarHover}
+    }
+`;
+
+const SidebarIcon = styled.i`
+    font-size: 40px;
+    margin-right: 26px;
 `;
 
 const FixedPositionOverlay = styled.div`

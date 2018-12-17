@@ -1,5 +1,7 @@
 // @flow
 
+import { desaturate, lighten } from 'polished';
+
 // https://flow.org/en/docs/types/objects/#toc-objects-as-maps
 
 const colors: {[color_property: string]: string} = {
@@ -9,6 +11,7 @@ const colors: {[color_property: string]: string} = {
   wood: '#66635B',
   eggshell: '#D7CEB2',
   blue: 'blue',
+  martinique: '#3D3A57',
 
   white: '#fafafa',
   mediumGray: '#eee',
@@ -16,7 +19,7 @@ const colors: {[color_property: string]: string} = {
   darkGrayDesaturated: '#222',
 
   get headerBg() {
-    return this.eggshell;
+    return desaturate(0.1, this.martinique);
   },
   get border() {
     return this.darkGray;
@@ -25,7 +28,10 @@ const colors: {[color_property: string]: string} = {
     return this.white;
   },
   get sidebarBg() {
-    return this.beige;
+    return this.martinique;
+  },
+  get sidebarHover() {
+    return lighten(0.1, this.martinique);
   },
   get primaryText() {
     return this.darkGray;
@@ -33,9 +39,12 @@ const colors: {[color_property: string]: string} = {
   get secondaryText() {
     return this.darkGray;
   },
+  get invertedText() {
+    return this.white;
+  },
   get accent() {
     return this.green;
   }
 };
 
-module.exports = colors;
+export default colors;

@@ -31,7 +31,7 @@ const routes: RouteType[] = [
       exact: true,
       sidebar: {
         name: 'Home',
-        icon: 'view_module'
+        icon: 'home'
       }
   },
   {
@@ -40,7 +40,7 @@ const routes: RouteType[] = [
       exact: true,
       sidebar: {
         name: 'Shapes',
-        icon: 'view_module'
+        icon: 'category'
       }
   },
   {
@@ -49,7 +49,7 @@ const routes: RouteType[] = [
       exact: true,
       sidebar: {
         name: 'Color',
-        icon: 'view_module'
+        icon: 'palette'
       }
   },
   {
@@ -58,7 +58,7 @@ const routes: RouteType[] = [
       exact: true,
       sidebar: {
         name: 'Motion',
-        icon: 'view_module'
+        icon: 'swap_calls'
       }
   },
   {
@@ -67,7 +67,7 @@ const routes: RouteType[] = [
       exact: true,
       sidebar: {
         name: 'Systems',
-        icon: 'view_module'
+        icon: 'grain'
       }
   }
 ];
