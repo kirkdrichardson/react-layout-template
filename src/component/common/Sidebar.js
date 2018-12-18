@@ -1,7 +1,7 @@
 // @flow strict
 
 import * as React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { media } from 'common/Breakpoints';
@@ -14,7 +14,8 @@ type Props = {
 };
 
 type State = {
-    open: boolean
+    open: boolean,
+    displayOverlay: boolean
 };
 
 const SidebarListItem = ({path, data}: {path: string, data: SidebarDataType}): React.Node => (
@@ -30,7 +31,10 @@ const SidebarListItem = ({path, data}: {path: string, data: SidebarDataType}): R
 // used to toggle scroll
 
 class Sidebar extends React.Component<Props, State> {
-    state = { open: false };
+    state = {
+        open: false,
+        displayOverlay: false
+    };
 
     // add an event listener to autoclose sidebar when the sidebar is open
     componentDidUpdate(_: {}, prevState: State) {
@@ -52,17 +56,27 @@ class Sidebar extends React.Component<Props, State> {
     closeSidebar = (): void => {
         if (this.state.open) {
             document.getElementsByTagName('main')[0].style.overflow = '';
-            this.setState({ open: false });
+
+            this.setState({displayOverlay: false}, () => {
+                setTimeout(() => {
+                    this.setState({ open: false });
+                }, 50);
+            })
         }
     }
 
     openSidebar = (): void => {
         document.getElementsByTagName('main')[0].style.overflow = 'hidden';
-        this.setState({ open: true });
+        this.setState({ open: true }, () => {
+            // add delay to allow overlay transition to run
+            setTimeout(() => {
+                this.setState({displayOverlay: true});
+            }, 50);
+        });
     }
 
     render() {
-        const { open } = this.state;
+        const { open, displayOverlay } = this.state;
 
         return (
             <div>
@@ -71,20 +85,18 @@ class Sidebar extends React.Component<Props, State> {
                     <TriggerIcon className="material-icons">view_module</TriggerIcon>
                 </Button>
 
-                {open &&
-                    <SidebarWrapper>
-                        <StyledList>
-                            {this.props.routes.map(route =>
-                                <>
-                                    <SidebarListItem key={route.path} path={route.path} data={route.sidebar} />
-                                    { route.path === '/' && <Divider />}
-                                </>
-                            )}
-                        </StyledList>
-                    </SidebarWrapper>
-                }
+                <SidebarWrapper open={open}>
+                    <StyledList>
+                        {this.props.routes.map(route =>
+                            <React.Fragment key={route.path}>
+                                <SidebarListItem path={route.path} data={route.sidebar} />
+                                { route.path === '/' && <Divider />}
+                            </React.Fragment>
+                        )}
+                    </StyledList>
+                </SidebarWrapper>
 
-                {open && <FixedPositionOverlay /> }
+                {open && <FixedPositionOverlay show={displayOverlay} /> }
             </div>
         );
     }
@@ -114,6 +126,16 @@ const SidebarWrapper = styled.div`
     width: 300px;
     z-index: 3;
     box-sizing: border-box;
+
+    ${props => props.open === true && css`
+        transform: translateX(0);
+        transition: transform 180ms;
+    `}
+    
+    ${props => props.open === false && css`
+        transform: translateX(-100%);
+        transition: transform 180ms;
+    `}
 
     ${media.tablet`
     top: ${tablet.headerHeight}px;
@@ -171,11 +193,16 @@ const FixedPositionOverlay = styled.div`
     left: 0;
     bottom: 0;
     background: #222;
-    opacity: 0.6;
     z-index: -99;
 
+    opacity: 0;
+    transition: opacity 100ms linear;
+    ${props => props.show === true && css`
+      opacity: 0.45;
+    `}
+
     top:  ${web.headerHeight}px;
-     ${media.tablet`top: ${tablet.headerHeight}px;`}
+    ${media.tablet`top: ${tablet.headerHeight}px;`}
     ${media.mobile`top: ${mobile.headerHeight}px;`}
 `;
 
