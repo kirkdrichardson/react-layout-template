@@ -23,7 +23,6 @@ export const AppContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: ${Color.primaryBg};
-  overflow: auto;
 `;
 
 export const MainContent = styled.main`
