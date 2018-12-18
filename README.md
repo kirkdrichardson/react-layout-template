@@ -1,3 +1,3 @@
-# React-web-template
+# The Union of Science and Art Playground
 
-- a mobile friendly React template using Styled Components
+- an educational interactive website, under construction
