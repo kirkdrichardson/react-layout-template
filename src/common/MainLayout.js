@@ -17,21 +17,21 @@ export const DeviceEnums: {[DeviceEnumType]: DeviceEnumType} = {
 
 
 export const AppContainer = styled.div`
-  min-height: 100%;
+  height: 100%;
   position: relative;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   background-color: ${Color.primaryBg};
+  overflow: auto;
 `;
 
 export const MainContent = styled.main`
+  display: flex;
   flex: 1;
-  height: 100%;
-  width: 100%;
+  justify-content: center;  
   padding: ${props => props.device === DeviceEnums.MOBILE ? mobile.bodyPadding : web.bodyPadding}px;
   padding: ${web.headerHeight + web.bodyPadding}px ${web.bodyPadding}px;
-  max-width: 1200px;
   box-sizing: border-box;
   color: ${Color.primaryText};
   font-size: 24px;
@@ -44,4 +44,9 @@ export const MainContent = styled.main`
   ${media.mobile`
   padding: ${mobile.headerHeight + mobile.bodyPadding}px ${mobile.bodyPadding}px;
   `}
+`;
+
+export const Page = styled.div`
+  width: 100%;
+  max-width: 1200px;
 `;

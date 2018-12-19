@@ -55,8 +55,6 @@ class Sidebar extends React.Component<Props, State> {
     // open & close methods are split for transitions & event listeners 
     closeSidebar = (): void => {
         if (this.state.open) {
-            document.getElementsByTagName('main')[0].style.overflow = '';
-
             this.setState({displayOverlay: false}, () => {
                 setTimeout(() => {
                     this.setState({ open: false });
@@ -66,7 +64,6 @@ class Sidebar extends React.Component<Props, State> {
     }
 
     openSidebar = (): void => {
-        document.getElementsByTagName('main')[0].style.overflow = 'hidden';
         this.setState({ open: true }, () => {
             // add delay to allow overlay transition to run
             setTimeout(() => {

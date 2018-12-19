@@ -20,7 +20,8 @@ import NoMatchingRoute from 'component/error/NoMatchingRoute';
 import {
   DeviceEnums,
   AppContainer,
-  MainContent
+  MainContent,
+  Page
 } from 'common/MainLayout';
 
 
@@ -142,17 +143,19 @@ class App extends React.Component<{}, State> {
         <AppContainer>
             <Header routes={routes} />
             <MainContent>
+              <Page>
                 <Switch>
-                    {routes.map(route => 
-                        <Route
-                          key={route.path}
-                          path={route.path}
-                          component={route.component}
-                          {...this.props}
-                          exact={route.exact} />
-                    )}
-                <Route path='/' component={NoMatchingRoute} />
-                </Switch>
+                      {routes.map(route => 
+                          <Route
+                            key={route.path}
+                            path={route.path}
+                            component={route.component}
+                            {...this.props}
+                            exact={route.exact} />
+                      )}
+                    <Route path='/' component={NoMatchingRoute} />
+                  </Switch>
+              </Page>
             </MainContent>
         </AppContainer>        
     );
