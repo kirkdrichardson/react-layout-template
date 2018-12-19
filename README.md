@@ -1,3 +1,5 @@
-# The Union of Science and Art Playground
+# Mobile friendly react template
 
-- an educational interactive website, under construction
+- Main container layout
+- toggleable sidebar with transition and overlay
+- React, polished, flow-bin, react-router 4
